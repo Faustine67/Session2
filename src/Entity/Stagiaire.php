@@ -143,3 +143,4 @@ class Stagiaire
         return $this;
 
 }
+}
