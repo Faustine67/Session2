@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{session.intitule}}{% endblock %}
+
+{% block body %}
+<table class="module>
+    <thead>
+        <tr>
+            <th> Module</th>
+            <th> Nombre jours</th>
+        </tr>
+    </thead>
+    {% for module in session.modules %}
+       <tr>
+          <td>{{module.nom}}</td>
+          <td>{{module.nombreJours}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

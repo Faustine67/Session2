@@ -18,17 +18,14 @@ class Module
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $details = null;
-
     #[ORM\ManyToOne(inversedBy: 'modules')]
     private ?Categorie $categorie = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $ManyToOne = null;
-
     #[ORM\OneToMany(mappedBy: 'module', targetEntity: Programmation::class)]
     private $programmations;
+
+    #[ORM\Column]
+    private ?int $nombreJours = null;
 
     public function __construct()
     {
@@ -52,18 +49,6 @@ class Module
         return $this;
     }
 
-    public function getDetails(): ?string
-    {
-        return $this->details;
-    }
-
-    public function setDetails(string $details): self
-    {
-        $this->details = $details;
-
-        return $this;
-    }
-
     public function getCategorie(): ?Categorie
     {
         return $this->categorie;
@@ -72,18 +57,6 @@ class Module
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    public function getManyToOne(): ?string
-    {
-        return $this->ManyToOne;
-    }
-
-    public function setManyToOne(string $ManyToOne): self
-    {
-        $this->ManyToOne = $ManyToOne;
 
         return $this;
     }
@@ -114,6 +87,18 @@ class Module
                 $programmation->setModule(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNombreJours(): ?int
+    {
+        return $this->nombreJours;
+    }
+
+    public function setNombreJours(int $nombreJours): self
+    {
+        $this->nombreJours = $nombreJours;
 
         return $this;
     }

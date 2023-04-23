@@ -18,7 +18,7 @@
     </thead>
     {% for session in formation.sessions %}
        <tr>
-            <td>{{ session.intitule }}</td>
+            <td><a href= "{{ path('show_session',{"id":session.id})}} style="color:yellow;text-decoration:none">{{ session.intitule }} </a></td>
             <td>{{ session.dateDebut }} </td>
             <td>{{ session.dateFin }} </td>
             <td>{{ session.nombrePlaces }} </td>

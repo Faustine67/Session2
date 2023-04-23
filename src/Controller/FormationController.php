@@ -26,6 +26,6 @@ class FormationController extends AbstractController
     public function show (ManagerRegistry $doctrine, Formation $formation, Session $session): Response
     {
         return $this->render('formation/show.html.twig', [
-            'formation' => $formation,]);
+            'formation' => $formations,]);
     }
 }
