@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormationController!{% endblock %}
+
+{% block body %}
+     <h1>Liste des formations </h1>
+
+   <div class ="gallery">
+      {% for formation in formations %}
+      <div class="gallery-item">
+         <img src="{{ formation.image }}">
+         <div class="image-caption">
+            <a href= "{{ path('show_formation',{"id":formation.id})}}" style="color:yellow; text-decoration:none"> {{formation.nom }} </a>
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+{% endblock %}

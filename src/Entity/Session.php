@@ -61,9 +61,9 @@ class Session
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDateDebut(): ?string
     {
-        return $this->dateDebut;
+        return $this->dateDebut->format('d/m/Y');
     }
 
     public function setDateDebut(\DateTimeInterface $dateDebut): self
@@ -73,9 +73,9 @@ class Session
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getDateFin(): ?string
     {
-        return $this->dateFin;
+        return $this->dateFin->format('d/m/Y');
     }
 
     public function setDateFin(\DateTimeInterface $dateFin): self

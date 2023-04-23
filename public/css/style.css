@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #f5f6f7;
+  }
+  
+  .header {
+    text-align: center;
+    text-transform: uppercase;
+    padding: 32px;
+    background-color: #f3c10e;
+    color: #d9e70d;
+    border-bottom: 4px solid #fdb347;
+  }
+   
+  .gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 10px 40px 40px 10px;
+    padding: 20px 40px;
+    position:relative;
+    display:inline-block;
+    text-align: center;
+  }
+  
+   .gallery img {
+    width: 100%;
+    max-width: 350px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 300px;
+    height:300px;
+  }
+  
+  .gallery::after {
+    content: "";
+    width: 350px;
+  }
+
+  .gallery-item{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+  }
+  
+  .image-caption{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(187, 179, 179, 0.5);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+
+  table{
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    border-color: #fdb347;
+  }
+
+  thead, tfoot {
+    color: white;
+    border-radius: 30px;
+  }
+  
+  thead th, tfoot th, tfoot td {
+    background: rgba(255, 166, 41);
+    border: 3px white;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: white;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: rgb(245, 221, 176);
+  }
