@@ -50,7 +50,7 @@ class FormationController extends AbstractController
     }
 
     #[Route('/formation/{id}', name: 'show_formation')]
-    public function show (ManagerRegistry $doctrine, Formation $formation, Session $session): Response
+    public function show (ManagerRegistry $doctrine, Formation $formation): Response
     {
         return $this->render('formation/show.html.twig', [
             'formation' => $formation,]);

@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\SessionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
+use App\Entity\Formation;
+use App\Entity\Stagiaire;
+use App\Entity\Programmation;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -20,7 +24,7 @@ class Session
     private ?string $intitule = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateDebut = null;
+    private ?DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateFin = null;
@@ -61,9 +65,9 @@ class Session
         return $this;
     }
 
-    public function getDateDebut(): ?string
+    public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->dateDebut->format('d/m/Y');
+        return $this->dateDebut;
     }
 
     public function setDateDebut(\DateTimeInterface $dateDebut): self
@@ -73,9 +77,9 @@ class Session
         return $this;
     }
 
-    public function getDateFin(): ?string
+    public function getDateFin(): ?\DateTimeInterface
     {
-        return $this->dateFin->format('d/m/Y');
+        return $this->dateFin;
     }
 
     public function setDateFin(\DateTimeInterface $dateFin): self
@@ -162,4 +166,15 @@ class Session
 
         return $this;
     }
+    // public function __toString():? string
+    // {
+    //     return $$this->stagiaires;
+    // }
+
+    public function _toString(): ?string
+    {
+        return $this->getDateDebut().' '.$this->getDateFin();
+    }
+
+    
 }
