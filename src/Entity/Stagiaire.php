@@ -142,5 +142,10 @@ class Stagiaire
         
         return $this;
 
-}
+    }
+
+    public function _toString(): ?string
+    {
+        return $this->getNom().' '.$this->getPrenom();
+     }
 }

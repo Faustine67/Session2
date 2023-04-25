@@ -2,20 +2,41 @@
 
 {% block title %}{{session.intitule}}{% endblock %}
 
+
 {% block body %}
-<table class="module>
+
+<h1>{{ session.intitule }}</h1>
+
+<table class="module">
     <thead>
         <tr>
             <th> Module</th>
             <th> Nombre jours</th>
         </tr>
     </thead>
-    {% for module in session.modules %}
+    <tbody>
+    {% for prog in session.programmations %}
        <tr>
-          <td>{{module.nom}}</td>
-          <td>{{module.nombreJours}}</td>
+          <td>{{prog.module.nom}}</td>
+          <td>{{prog.nombreJours}}</td>
         </tr>
     {% endfor %}
+    </tbody>
+</table>
+<table class="stagiaire">
+    <thead>
+        <tr>
+            {# la commande length permet de compter le nombre de stagiaire dans ma table #}
+            <th> Liste des inscrits  {{session.stagiaires|length}}/{{session.nombrePlaces}}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for stagiaire in session.stagiaires %}
+       <tr>
+          <td>{{stagiaire._toString}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
 </table>
 
 {% endblock %}

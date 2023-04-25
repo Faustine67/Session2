@@ -14,15 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class StagiaireController extends AbstractController
 {
     #[Route('/stagiaire/add', name: 'add_stagiaire')]
-    public function add(ManagerRegistry $doctrine, Stagiaire $stagiaire, Request $request): Response
+    public function add(EntityManagerInterface $entityManager, Stagiaire $stagiaire=null, Request $request): Response
     {
-        $stagiaires = $doctrine->getRepository(Stagiaire::class)->findAll();
-
-        //Si le stagiaire n'existe pas dans la liste alors on en créer un
-        if(!stagiaire){
-        $stagiaire = new Stagiaire();
-        }
-
         //Creation du formulaire
 
         $form= $this->createForm(StagiaireType::class, $stagiaire);
@@ -34,15 +27,14 @@ class StagiaireController extends AbstractController
             $entityManager->persist($stagiaire);
             $entityManager->flush();
 
-            return $this->redirectToRoute('add_stagiaire');
+            return $this->redirectToRoute('detail_stagiaire',array('id' => $stagiaire->getId()));
         }
 
         return $this->render('stagiaire/add.html.twig', [
-            'controller_name' => 'StagiaireController',
-            'stagiaire' => $stagiaires,
            'formAddStagiaire' => $form->createView(),
         ]);
     }
+
 
      #[Route('/stagiaire/detail/{id}', name: 'detail_stagiaire')]
      public function detail(ManagerRegistry $doctrine, $id):Response{

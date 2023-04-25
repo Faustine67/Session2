@@ -12,18 +12,17 @@
             <th> Nombre de places théoriques</th>
             <th> Nombre de places réservées</th>
             <th> Nombre de places restantes</th>
-            <th> Détails Programme</th>
             <th> Ajout de stagiaire</th>
         </tr>
     </thead>
     {% for session in formation.sessions %}
        <tr>
-            <td><a href= "{{ path('show_session',{"id":session.id})}} style="color:yellow;text-decoration:none">{{ session.intitule }} </a></td>
+            <td><a href="{{path('show_session',{"id":session.id})}}">{{ session.intitule }} </a></td>
             <td>{{ session.dateDebut }} </td>
             <td>{{ session.dateFin }} </td>
             <td>{{ session.nombrePlaces }} </td>
-            <td></td>
-            <td></td>
+            <td>{{session.stagiaires|length}}</td>
+            <td>{{session.nombrePlaces - session.stagiaires|length}} </td>
             <td></td>
             <td></td>
         </tr>
