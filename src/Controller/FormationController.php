@@ -26,13 +26,7 @@ class FormationController extends AbstractController
         ]);
     }
 
-    #[Route('/formation/{id}', name: 'show_formation')]
-    public function show (ManagerRegistry $doctrine, Formation $formation, Session $session): Response
-    {
-        return $this->render('formation/show.html.twig', [
-            'formation' => $formation,]);
-    }
-
+    // ATTENTION, il faut toujours mettre la fonction add avant formation/id sinon le controller ne trouvera pas l'entity
     #[Route('/formation/add', name: 'add_formation')]
     public function add(EntityManagerInterface $entityManager, Formation $formation=null, Request $request): Response
     {
@@ -47,11 +41,19 @@ class FormationController extends AbstractController
             $entityManager->persist($formation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('detail_formation',array('id' => $formation->getId()));
+            return $this->redirectToRoute('app_formation',array('id' => $formation->getId()));
         }
 
         return $this->render('formation/add.html.twig', [
            'formAddFormation' => $form->createView(),
         ]);
     }
+
+    #[Route('/formation/{id}', name: 'show_formation')]
+    public function show (ManagerRegistry $doctrine, Formation $formation, Session $session): Response
+    {
+        return $this->render('formation/show.html.twig', [
+            'formation' => $formation,]);
+    }
+
 }

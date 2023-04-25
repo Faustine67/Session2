@@ -3,12 +3,14 @@
 {% block title %}Ajouter une formation{% endblock %}
 
 {% block body %}
+<h1>Ajouter une formation </h1>
 
        {{form_start(formAddFormation)}}
 
         <div>
             {{form_row(formAddFormation.nom)}}
             {{form_row(formAddFormation.image)}}
+            {{form_row(formAddFormation.submit)}}
         </div>
 
        {{form_end(formAddFormation)}}
