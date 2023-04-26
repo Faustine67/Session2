@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Formation;
 use App\Form\SessionType;
+use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,10 +47,14 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}', name: 'show_session')]
-    public function show (ManagerRegistry $doctrine, Formation $formation, Session $session): Response
+    public function show (ManagerRegistry $doctrine, Formation $formation, Session $session=null, SessionRepository $sr): Response
     {
+        $session_id=$session->getId();
+        $noninscrits= $sr->findNonInscrits($session_id);
+
         return $this->render('session/show.html.twig', [
-            'session' => $session,]);
+            'session' => $session,
+            'nonInscrits' => $noninscrits]);
     }
 
 }

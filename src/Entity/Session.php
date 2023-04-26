@@ -169,8 +169,5 @@ class Session
     // public function __toString():? string
     // {
     //     return $$this->stagiaires;
-    // }
-
-
-    
+    // }    
 }

@@ -13,8 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StagiaireController extends AbstractController
 {
-    #[Route('/stagiaire/add', name: 'add_stagiaire')]
-    public function add(EntityManagerInterface $entityManager, Stagiaire $stagiaire=null, Request $request): Response
+    #[Route('/stagiaire/create', name: 'create_stagiaire')]
+    public function create(EntityManagerInterface $entityManager, Stagiaire $stagiaire=null, Request $request): Response
     {
         //Creation du formulaire
 
@@ -30,10 +30,39 @@ class StagiaireController extends AbstractController
             return $this->redirectToRoute('detail_stagiaire',array('id' => $stagiaire->getId()));
         }
 
-        return $this->render('stagiaire/add.html.twig', [
+        return $this->render('stagiaire/create.html.twig', [
            'formAddStagiaire' => $form->createView(),
         ]);
     }
+
+    #[Route('/stagiaire/{idSession}/add', name:'add_stagiaire')]
+    public function add(EntityManagerInterface $entityManager, Stagiaire $stagiaire=null, Request $request):Response
+    {
+        // $stagiaires=doctrine->getRepository(Stagiaire::class)->findAll
+        //Creation du formulaire
+        
+        $form= $this->createForm(StagiaireType::class, $stagiaire);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $session= $form->getData();
+            $entityManager->persist($stagiaire);
+            $entityManager->flush();
+            
+            return $this->redirectToRoute('show_session',array('id' => $session->getFormation()->getId()));
+        }
+        
+        // return $this->render('session/show.html.twig', [
+        //     'stagiaires' => $stagiaire,
+        // ]);
+        return $this->render('stagiaire/add.html.twig', [
+           'formAddSession' => $form->createView(),
+        ]);
+
+    }
+
+
 
 
      #[Route('/stagiaire/detail/{id}', name: 'detail_stagiaire')]

@@ -23,20 +23,39 @@
     {% endfor %}
     </tbody>
 </table>
-<table class="stagiaire">
+<table class="stagiaireinscrit">
     <thead>
         <tr>
             {# la commande length permet de compter le nombre de stagiaire dans ma table #}
-            <th> Liste des inscrits  {{session.stagiaires|length}}/{{session.nombrePlaces}}</th>
+            <th> Stagiaires inscrits  {{session.stagiaires|length}}/{{session.nombrePlaces}}</th>
+            <th>Désinscrire</th>
         </tr>
     </thead>
     <tbody>
     {% for stagiaire in session.stagiaires %}
        <tr>
           <td>{{stagiaire._toString}}</td>
+          <td></td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
+<table class="stagiairenoninscrit">
+    <thead>
+        <tr>
+            {# la commande length permet de compter le nombre de stagiaire dans ma table #}
+            <th> Stagiaire non inscrits</th>
+            <th> Inscrire</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for stagiaire in nonInscrits %}
+       <tr>
+        <td>{{ stagiaire.nom}}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 
 {% endblock %}
