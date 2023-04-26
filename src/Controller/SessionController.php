@@ -24,7 +24,7 @@ class SessionController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $stagiaire= $form->getData();
+            $session= $form->getData();
             $entityManager->persist($session);
             $entityManager->flush();
 

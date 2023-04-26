@@ -18,8 +18,8 @@
     {% for session in formation.sessions %}
        <tr>
             <td><a href="{{path('show_session',{"id":session.id})}}">{{ session.intitule }} </a></td>
-            <td>{{ session.dateDebut }} </td>
-            <td>{{ session.dateFin }} </td>
+            <td>{{ session.dateDebut|date('d/m/Y') }} </td>
+            <td>{{ session.dateFin| date('d/m/Y') }}</td>
             <td>{{ session.nombrePlaces }} </td>
             <td>{{session.stagiaires|length}}</td>
             <td>{{session.nombrePlaces - session.stagiaires|length}} </td>

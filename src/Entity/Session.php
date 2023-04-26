@@ -171,10 +171,6 @@ class Session
     //     return $$this->stagiaires;
     // }
 
-    public function _toString(): ?string
-    {
-        return $this->getDateDebut().' '.$this->getDateFin();
-    }
 
     
 }
