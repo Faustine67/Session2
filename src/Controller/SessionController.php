@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Entity\Formation;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SessionController extends AbstractController
 {
@@ -56,5 +58,35 @@ class SessionController extends AbstractController
             'session' => $session,
             'nonInscrits' => $noninscrits]);
     }
+
+    #[Route("/session/removeStagiaire/{idSe}/{idSt}", name: 'removeStagiaire')]
+    // ParamConverter permet de convertir les parametres en instances de Session et de Stagiaire en utilisant l'injection de
+    // dependance de Doctrine pour recuper les entités correspondant à la base de donnée
+    #[ParamConverter("session", options:["mapping"=>["idSe"=>"id"]])]
+    #[ParamConverter("stagiaire", options:["mapping"=>["idSt"=>"id"]])]
+
+    public function removeStagiaire(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire){
+        $em = $doctrine->getManager();
+        $session->removeStagiaire($stagiaire);
+        $em->persist($session);
+        $em->flush();
+
+    return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+}   
+
+    
+    #[Route("/session/addStagiaire/{idSe}/{idSt}", name: 'addStagiaire')]
+    #[ParamConverter("session", options:["mapping"=>["idSe"=>"id"]])]
+    #[ParamConverter("stagiaire", options:["mapping"=>["idSt"=>"id"]])]
+    
+    public function addStagiaire(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire) {
+
+        $em = $doctrine->getManager();
+        $session->addStagiaire($stagiaire);
+        $em->persist($session);
+        $em->flush();
+
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+    }   
 
 }

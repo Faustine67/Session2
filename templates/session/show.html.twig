@@ -35,7 +35,7 @@
     {% for stagiaire in session.stagiaires %}
        <tr>
           <td>{{stagiaire._toString}}</td>
-          <td></td>
+          <td><a href="{{ path('removeStagiaire', {'idSe': session.id, 'idSt': stagiaire.id}) }}"><img src="public/assets/Images/supprimer.png"></a></td>
         </tr>
     {% endfor %}
     </tbody>
@@ -52,10 +52,24 @@
     {% for stagiaire in nonInscrits %}
        <tr>
         <td>{{ stagiaire.nom}}</a></td>
+        <td><a href="{{ path('addStagiaire', {'idSe': session.id, 'idSt': stagiaire.id}) }}">Ajout Image</a></td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+
+
+<h1> Ajouter un module</h1>
+
+       {{form_start(formAddModule)}}
+
+            {{form_row(formAddModule.nom)}}
+            {{form_row(formAddSession.categorie)}}
+            {{form_row(formAddSession.nombreJours)}}
+            {{form_row(formAddSession.submit)}}
+
+
+       {{form_end(formAddSession)}}
 
 
 {% endblock %}

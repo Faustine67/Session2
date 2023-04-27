@@ -39,6 +39,14 @@ class StagiaireRepository extends ServiceEntityRepository
         }
     }
 
+    public function add(Stagiaire $entity, bool $flush = true): void
+    {
+        $this->_em->persist($entity);
+        if ($flush) {
+            $this->_em->flush();
+        }
+    }
+
 //    /**
 //     * @return Stagiaire[] Returns an array of Stagiaire objects
 //     */
