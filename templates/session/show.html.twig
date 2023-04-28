@@ -20,7 +20,7 @@
        <tr>
           <td>{{prog.module.nom}}</td>
           <td>{{prog.nombreJours}}</td>
-          <td></td>
+          <td><a href="{{ path('removeProgrammation',{'idSe': session.id, 'idMo': prog.module.id})}}"</a>Image</td>
         </tr>
     {% endfor %}
     </tbody>

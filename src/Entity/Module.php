@@ -77,7 +77,7 @@ class Module
         return $this;
     }
 
-    public function removeProgrammation(Programmation $programmation): self
+    public function removeModule(Programmation $programmation): self
     {
         if ($this->programmations->removeElement($programmation)) {
             // set the owning side to null (unless already changed)

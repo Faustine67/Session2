@@ -59,9 +59,7 @@ class StagiaireController extends AbstractController
 
     }
 
-
-
-
+    
      #[Route('/stagiaire/detail/{id}', name: 'detail_stagiaire')]
      public function detail(ManagerRegistry $doctrine, $id):Response{
         $stagiaire= $doctrine->getRepository(Stagiaire::class)->find($id);

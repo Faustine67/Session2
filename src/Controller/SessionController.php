@@ -112,12 +112,29 @@ public function addStagiaire(ManagerRegistry $doctrine, Session $session, Stagia
                 }
         }
     }
+
+    #[Route("/session/removeProgrammation/{idSe}/{idMo}", name: 'removeProgrammation')]
+    // ParamConverter permet de convertir les parametres en instances de Session et de Programmation en utilisant l'injection de
+    // dependance de Doctrine pour recuper les entités correspondant à la base de donnée
+    #[ParamConverter("session", options:["mapping"=>["idSe"=>"id"]])]
+    #[ParamConverter("module", options:["mapping"=>["idMo"=>"id"]])]
+    
+    public function removeProgrammation(ManagerRegistry $doctrine, Session $session, Module $module, Programmation $programmation){
+        $em = $doctrine->getManager();
+        $session->removeProgrammation($programmation);
+        $em->persist($session);
+        $em->flush();
+
+    return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+}   
+
     
     #[Route('/session', name: 'app_session')]
     public function index(): Response
     {
         return $this->render('session/index.html.twig', [
             'controller_name' => 'SessionController',
+            
         ]);
     }
 
