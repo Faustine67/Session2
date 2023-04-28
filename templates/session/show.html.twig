@@ -12,6 +12,7 @@
         <tr>
             <th> Module</th>
             <th> Nombre jours</th>
+            <th>Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -19,10 +20,14 @@
        <tr>
           <td>{{prog.module.nom}}</td>
           <td>{{prog.nombreJours}}</td>
+          <td></td>
         </tr>
     {% endfor %}
     </tbody>
-</table>
+</table><br>
+
+<h1>Les stagiaires</h1>
+
 <table class="stagiaireinscrit">
     <thead>
         <tr>
@@ -39,7 +44,7 @@
         </tr>
     {% endfor %}
     </tbody>
-</table>
+</table><br>
 <table class="stagiairenoninscrit">
     <thead>
         <tr>
@@ -51,25 +56,38 @@
     <tbody>
     {% for stagiaire in nonInscrits %}
        <tr>
-        <td>{{ stagiaire.nom}}</a></td>
+        <td>{{ stagiaire.nom}}</td>
         <td><a href="{{ path('addStagiaire', {'idSe': session.id, 'idSt': stagiaire.id}) }}">Ajout Image</a></td>
     </tr>
     {% endfor %}
     </tbody>
-</table>
+</table><br>
 
 
-<h1> Ajouter un module</h1>
+<h1> Liste Modules non utilisés </h1>
 
-       {{form_start(formAddModule)}}
-
-            {{form_row(formAddModule.nom)}}
-            {{form_row(formAddSession.categorie)}}
-            {{form_row(formAddSession.nombreJours)}}
-            {{form_row(formAddSession.submit)}}
-
-
-       {{form_end(formAddSession)}}
+<table class="modulenonutilisé">
+    <thead>
+        <tr>
+            {# la commande length permet de compter le nombre de stagiaire dans ma table #}
+            <th> Module non utilisé</th>
+            <th>Nombre de jours</th>
+            <th> Ajouter</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for module in nonUtilises %}
+       <tr>
+        <td>{{ module.nom}}</td>
+        <td>
+            <form action="{{ path('addProgrammation', {'idSe': session.id, 'idMo': module.id})}}" method="post">
+                    <label for="nombrejours"></label>
+                    <input type="number" name="nombreJours" value="1" min="1" max="365">
+        <td><input type="submit" value="Ajouter"></td>
+            </form>
+    </tr>
+    {% endfor %}
+    </tbody>
 
 
 {% endblock %}

@@ -67,6 +67,34 @@ public function findNonInscrits($session_id){
         return $query->getResult();
 }
 
+ //Afficher les modules non utilisés //
+ public function findNonUtilises($session_id){
+    $em=$this->getEntityManager();
+    $sub=$em->createQueryBuilder();
+
+    $qb=$sub;
+    //selectionner tous les module d'une session dont l'id est passé en paramètre
+    $qb->select('m')
+        ->from('App\Entity\Module','m')
+        ->leftJoin('m.programmations', 'p')
+        ->where('p.session = :id');
+        
+        $sub = $em->createQueryBuilder();
+        // sélectionner tous les modules qui ne SONT PAS (NOT IN) dans le résultat précédent
+        // on obtient donc les module non utilisés pour une session définie
+        $sub->select('mo')
+            ->from('App\Entity\Module', 'mo')
+            ->where($sub->expr()->NotIn('mo.id', $qb->getDQL()))
+            // requête paramétrée
+            ->setParameter('id', $session_id)
+            // trier la liste des stagiaires sur le nom de famille
+            ->orderBy('mo.nom');
+        
+        //renvoyer le resultat 
+        $query = $sub->getQuery();
+        return $query->getResult();
+}
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

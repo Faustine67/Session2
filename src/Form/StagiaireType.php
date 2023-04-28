@@ -37,7 +37,6 @@ class StagiaireType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter'
             ]);
-            // ->add('sessions')
         ;
     }
 

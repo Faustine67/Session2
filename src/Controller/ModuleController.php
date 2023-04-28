@@ -13,6 +13,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ModuleController extends AbstractController
 {
+    
+    // ATTENTION, il faut toujours mettre la fonction add avant formation/id sinon le controller ne trouvera pas l'entity
+        #[Route('/module/create', name: 'create_module')]
+         public function create(EntityManagerInterface $entityManager, Module $module=null, Request $request): Response
+        {
+             //Creation du formulaire
+     
+             $form= $this->createForm(ModuleType::class, $module);
+             $form->handleRequest($request);
+     
+             if($form->isSubmitted() && $form->isValid()){
+     
+                 $module= $form->getData();
+                 $entityManager->persist($module);
+                 $entityManager->flush();
+     
+                 return $this->redirectToRoute('app_session',array('id' => $module->getId()));
+             }
+     
+             return $this->render('module/create.html.twig', [
+                'formAddModule' => $form->createView(),
+             ]);
+            }
+
     #[Route('/module/{id}', name: 'app_module')]
     public function index(ManagerRegistry $doctrine, Module $module): Response
     {
@@ -21,28 +45,5 @@ class ModuleController extends AbstractController
             'module' => $modules,
         ]);
     }
-
-     // ATTENTION, il faut toujours mettre la fonction add avant formation/id sinon le controller ne trouvera pas l'entity
-     #[Route('/session/{id}/', name: 'show_session')]
-     public function add(EntityManagerInterface $entityManager, Module $module=null, Request $request): Response
-     {
-         //Creation du formulaire
- 
-         $form= $this->createForm(ModuleType::class, $module);
-         $form->handleRequest($request);
- 
-         if($form->isSubmitted() && $form->isValid()){
- 
-             $module= $form->getData();
-             $entityManager->persist($module);
-             $entityManager->flush();
- 
-             return $this->redirectToRoute('show_session',array('id' => $module->getSession()->getId()));
-         }
- 
-         return $this->render('session/show.html.twig', [
-            'formAddModule' => $form->createView(),
-         ]);
      }
 
-}

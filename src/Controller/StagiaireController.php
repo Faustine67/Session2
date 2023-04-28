@@ -52,10 +52,7 @@ class StagiaireController extends AbstractController
             
             return $this->redirectToRoute('show_session',array('id' => $session->getFormation()->getId()));
         }
-        
-        // return $this->render('session/show.html.twig', [
-        //     'stagiaires' => $stagiaire,
-        // ]);
+      
         return $this->render('stagiaire/add.html.twig', [
            'formAddSession' => $form->createView(),
         ]);

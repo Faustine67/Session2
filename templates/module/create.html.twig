@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un module{% endblock %}
+
+{% block body %}
+
+       {{form_start(formAddModule)}}
+
+            {{form_row(formAddModule.nom)}}
+            {{form_row(formAddModule.categorie)}}
+            {{form_row(formAddModule.submit)}}
+
+
+
+       {{form_end(formAddModule)}}
+
+{% endblock %}

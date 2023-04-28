@@ -24,8 +24,6 @@ class Module
     #[ORM\OneToMany(mappedBy: 'module', targetEntity: Programmation::class)]
     private $programmations;
 
-    #[ORM\Column]
-    private ?int $nombreJours = null;
 
     public function __construct()
     {
@@ -91,15 +89,9 @@ class Module
         return $this;
     }
 
-    public function getNombreJours(): ?int
+    public function __toString()
     {
-        return $this->nombreJours;
+        return $this->getCategorie();
     }
 
-    public function setNombreJours(int $nombreJours): self
-    {
-        $this->nombreJours = $nombreJours;
-
-        return $this;
-    }
 }
