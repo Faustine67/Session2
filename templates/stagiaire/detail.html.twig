@@ -5,12 +5,12 @@
 
 {% block body %}
 
-<ul class="infos">
-    <li> {{ stagiaire.nom }} {{stagiaire.prenom}}</li>
-    <li> {{ stagiaire.DateNaissance|date("m/d/Y") }}</li>
-    <li> {{ stagiaire.email }}</li>
-    <li>{{ stagiaire.telephone }}</li>
-</ul>
+<div class="infos">
+     {{ stagiaire.nom }} {{stagiaire.prenom}} <br>
+    {{ stagiaire.DateNaissance|date("m/d/Y") }} <br>
+    {{ stagiaire.email }} <br>
+    {{ stagiaire.telephone }}<br>
+</div>
 
 <ul class="session">
 
