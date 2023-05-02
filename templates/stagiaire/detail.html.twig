@@ -14,6 +14,19 @@
 
 <ul class="session">
 
+    {% if stagiaire.sessions|length >= 1 %}
+    {% for session in stagiaire.sessions %}
+    <li>
+        <p>{{session.intitule}}
+        (du
+        {{session.dateDebut|date("d/m/Y")}} au {{session.dateFin|date("d/m/Y")}})
+        </p>
+        {% endfor %}
+    </li>    
 </ul>
+{% else %}
+<p>Cet étudiant n'est inscrit à aucune session.</p>
+
+{% endif %}
 
 {% endblock %}
