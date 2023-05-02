@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formateur{% endblock %}
+
+
+{% block body %}
+
+<div class="infos">
+     {{ formateur.nom }} {{formateur.prenom}} <br>
+    {{ formateur.DateNaissance|date("m/d/Y") }} <br>
+    {{ formateur.email }} <br>
+    {{ formateur.telephone }}<br>
+</div>
+
+{# <ul class="session">
+
+    {% if formateur.sessions|length >= 1 %}
+    {% for session in formateur.sessions %}
+    <li>
+        <p>{{session.intitule}}
+        (du
+        {{session.dateDebut|date("d/m/Y")}} au {{session.dateFin|date("d/m/Y")}})
+        </p>
+        {% endfor %}
+    </li>    
+</ul>
+{% else %}
+<p>Le formateur n'est inscrit à aucune session.</p>
+
+{% endif %} #}
+
+{% endblock %}

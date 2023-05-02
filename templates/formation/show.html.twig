@@ -12,7 +12,6 @@
             <th> Nombre de places théoriques</th>
             <th> Nombre de places réservées</th>
             <th> Nombre de places restantes</th>
-            <th> Ajout de stagiaire</th>
         </tr>
     </thead>
     {% for session in formation.sessions %}
@@ -23,8 +22,6 @@
             <td>{{ session.nombrePlaces }} </td>
             <td>{{session.stagiaires|length}}</td>
             <td>{{session.nombrePlaces - session.stagiaires|length}} </td>
-            <td></td>
-            <td></td>
         </tr>
 
     {% endfor %}

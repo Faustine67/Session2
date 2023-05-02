@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un formateur{% endblock %}
+
+{% block body %}
+
+       {{form_start(formAddFormateur)}}
+
+        <div class="nomPrenom">
+            {{form_row(formAddFormateur.nom)}}
+            {{form_row(formAddFormateur.prenom)}}
+        </div>
+        <div>
+            {{form_row(formAddFormateur.dateNaissance)}}
+            {{form_row(formAddFormateur.ville)}}
+            {{form_row(formAddFormateur.email)}}
+            {{form_row(formAddFormateur.telephone)}}
+            {{form_row(formAddFormateur.submit)}}
+        </div>
+
+       {{form_end(formAddFormateur)}}
+
+{% endblock %}
